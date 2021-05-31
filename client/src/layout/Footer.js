@@ -1,32 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 const Footer = props => {
   return (
-    <footer class="footer">
-      <div class="footer__logo">
-        <img src="/img/logo-green.png" alt="Natour logo" />
+    <footer className="footer">
+      <div className="footer__logo">
+        <img src="../assets/img/logo-green.png" alt="Natour logo" />
       </div>
-      <ul class="footer__nav">
+      <ul className="footer__nav">
         <li>
-          <a href="#">About us</a>
+          <Link to="#">About us</Link>
         </li>
         <li>
-          <a href="#">Download apps</a>
+          <Link to="#">Download apps</Link>
         </li>
         <li>
-          <a href="#">Become a guide</a>
+          <Link to="#">Become a guide</Link>
         </li>
         <li>
-          <a href="#">Careers</a>
+          <Link to="#">Careers</Link>
         </li>
         <li>
-          <a href="#">Contact</a>
+          <Link to="#">Contact</Link>
         </li>
       </ul>
-      <p class="footer__copyright">
-        &copy; by Jonas Schmedtmann. Feel free to use this project for your own
-        purposes, EXCEPT producing your own course or tutorials!
+      <p className="footer__copyright">
+        20201 &copy; copyright by Bhaskar Talla.
       </p>
     </footer>
   )
