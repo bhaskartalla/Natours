@@ -1,11 +1,18 @@
-import axios from 'axios'
-import { requestLogin, receiveLogin, failureLogin } from './Actions'
-import { LOGIN_URL } from './Constants'
+import api from '../utils/api'
+import {
+  requestLogin,
+  receiveLogin,
+  failureLogin,
+  requestGetCurrentUser,
+  receiveGetCurrentUser,
+  failureGetCurrentUser
+} from './Actions'
+import { LOGIN_URL, GET_CURRENT_USER_URL } from './Constants'
 
 export const login = payload => {
   return dispatch => {
     dispatch(requestLogin())
-    axios
+    api
       .post(LOGIN_URL, payload)
       .then(response => {
         localStorage.setItem('access_token', response?.data?.token)
@@ -13,6 +20,20 @@ export const login = payload => {
       })
       .catch(() => {
         dispatch(failureLogin())
+      })
+  }
+}
+
+export const getCurrentUser = () => {
+  return dispatch => {
+    dispatch(requestGetCurrentUser())
+    api
+      .get(GET_CURRENT_USER_URL)
+      .then(response => {
+        dispatch(receiveGetCurrentUser(response?.data?.data?.data))
+      })
+      .catch(() => {
+        dispatch(failureGetCurrentUser())
       })
   }
 }

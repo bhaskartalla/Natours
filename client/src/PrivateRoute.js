@@ -19,7 +19,7 @@ const PrivateRoute = ({
         ) : isAuthenticated ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/overview" />
+          <Redirect to="/login" />
         )
       }
     />
@@ -27,7 +27,7 @@ const PrivateRoute = ({
 }
 
 PrivateRoute.propTypes = {
-  auth: PropTypes.bool.isRequired,
+  auth: PropTypes.object.isRequired,
   component: PropTypes.any.isRequired
 }
 

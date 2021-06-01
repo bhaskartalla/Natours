@@ -20,10 +20,8 @@ const Login = ({ isAuthenticated, login }) => {
     login(loginDetails)
   }
 
-  console.log(`isAuthenticated`, isAuthenticated)
-
   return isAuthenticated ? (
-    <Redirect to="/dashboard" />
+    <Redirect to="/" />
   ) : (
     <main className="main">
       <div className="login-form">
