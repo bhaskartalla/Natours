@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
 const MyProfile = props => {
   return (
@@ -116,7 +116,7 @@ const MyProfile = props => {
                 <img
                   className="form__user-photo"
                   src="/img/users/user.photo"
-                  alt="User photo"
+                  alt="User "
                 />
                 <Link to="btn-text" href="">
                   Choose new photo
@@ -185,6 +185,6 @@ const MyProfile = props => {
   )
 }
 
-MyProfile.propTypes = {}
+// MyProfile.propTypes = {}
 
 export default MyProfile

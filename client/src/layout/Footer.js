@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const Footer = props => {
@@ -31,7 +30,5 @@ const Footer = props => {
     </footer>
   )
 }
-
-Footer.propTypes = {}
 
 export default Footer

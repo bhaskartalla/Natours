@@ -7,14 +7,14 @@ import Spinner from '../common/Spinner'
 const Overview = ({ tours, getAllTours, isLoading }) => {
   useEffect(() => {
     getAllTours()
-  }, [])
+  }, [getAllTours])
 
   return isLoading ? (
     <Spinner />
   ) : (
     <main className="main">
       <div className="card-container">
-        {tours?.map(tour => {
+        {tours?.map((tour, i) => {
           const {
             imageCover,
             name,
@@ -31,7 +31,7 @@ const Overview = ({ tours, getAllTours, isLoading }) => {
             slug
           } = tour
           return (
-            <div className="card">
+            <div key={i} className="card">
               <div className="card__header">
                 <div className="card__picture">
                   <div className="card__picture-overlay">&nbsp;</div>
@@ -94,10 +94,7 @@ const Overview = ({ tours, getAllTours, isLoading }) => {
                     rating ({ratingsQuantity})
                   </span>
                 </p>
-                <a
-                  href={`/tour/${tour.slug}`}
-                  className="btn btn--green btn--small"
-                >
+                <a href={`/tour/${slug}`} className="btn btn--green btn--small">
                   Details
                 </a>
               </div>

@@ -8,6 +8,7 @@ import {
   failureGetCurrentUser
 } from './Actions'
 import { LOGIN_URL, GET_CURRENT_USER_URL } from './Constants'
+import { showAlert } from '../common/ActionCreater'
 
 export const login = payload => {
   return dispatch => {
@@ -16,6 +17,7 @@ export const login = payload => {
       .post(LOGIN_URL, payload)
       .then(response => {
         localStorage.setItem('access_token', response?.data?.token)
+        dispatch(showAlert('success', 'Login Successfull !', 5000))
         dispatch(receiveLogin(response?.data))
       })
       .catch(() => {
