@@ -7,7 +7,7 @@ import { updateMe, updatePAssword } from '../login/ActionCreater'
 import { showAlert } from '../common/ActionCreater'
 
 const MyProfile = ({
-  auth: { user, isLoading, isPasswordFail },
+  auth: { user, isLoading },
   updateMe,
   updatePAssword,
   showAlert
@@ -16,6 +16,7 @@ const MyProfile = ({
     email: '',
     name: ''
   })
+  const { email, name } = accountDetails
 
   const [changePassword, setChangePassword] = useState({
     passwordCurrent: '',
@@ -24,11 +25,10 @@ const MyProfile = ({
   })
   const [userPhoto, setUserPhoto] = useState(null)
 
-  const { email, name } = accountDetails
   const { passwordCurrent, password, passwordConfirm } = changePassword
 
   useEffect(() => {
-    setAccountDetails({ email: user?.email, name: user?.name })
+    user && setAccountDetails({ email: user.email, name: user.name })
   }, [user])
 
   const handleAccSetting = e =>
@@ -192,12 +192,12 @@ const MyProfile = ({
                     alt="User "
                   />
                   <span className="btn-text"> Choose new photo</span>
-                  <input
+                  {/* <input
                     type="file"
                     name="myImage"
                     className="btn-text"
                     onChange={handleImageUpload}
-                  />
+                  /> */}
                 </div>
                 <div className="form__group right">
                   <button

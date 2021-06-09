@@ -11,7 +11,8 @@ import {
   failureUpdateMe,
   requestUpdatePassword,
   receiveUpdatePassword,
-  failureUpdatePassword
+  failureUpdatePassword,
+  requestLogout
 } from './Actions'
 import {
   LOGIN_URL,
@@ -88,5 +89,13 @@ export const updatePAssword = payload => {
           )
         )
       })
+  }
+}
+
+export const logout = () => {
+  console.log('LOG_OUT')
+  return dispatch => {
+    localStorage.removeItem('access_token')
+    dispatch(requestLogout())
   }
 }

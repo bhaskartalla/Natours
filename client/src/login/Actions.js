@@ -10,7 +10,8 @@ import {
   FAILURE_SAVE_SETTINGS,
   REQUEST_SAVE_PASSWORD,
   RECEIVE_SAVE_PASSWORD,
-  FAILURE_SAVE_PASSWORD
+  FAILURE_SAVE_PASSWORD,
+  LOG_OUT
 } from './ActionTypes'
 
 export const requestLogin = () => ({
@@ -63,4 +64,8 @@ export const receiveUpdatePassword = payload => ({
 
 export const failureUpdatePassword = () => ({
   type: FAILURE_SAVE_PASSWORD
+})
+
+export const requestLogout = () => ({
+  type: LOG_OUT
 })

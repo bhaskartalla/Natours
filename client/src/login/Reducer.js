@@ -10,7 +10,8 @@ import {
   FAILURE_SAVE_SETTINGS,
   REQUEST_SAVE_PASSWORD,
   RECEIVE_SAVE_PASSWORD,
-  FAILURE_SAVE_PASSWORD
+  FAILURE_SAVE_PASSWORD,
+  LOG_OUT
 } from './ActionTypes'
 
 const initialState = {
@@ -36,7 +37,6 @@ export default function auth(state = initialState, action) {
 
     case RECEIVE_LOGIN:
     case RECEIVE_SAVE_PASSWORD:
-      console.log(`payload`, payload)
       return {
         ...state,
         isLoading: false,
@@ -70,6 +70,9 @@ export default function auth(state = initialState, action) {
         user: null,
         isError: true
       }
+
+    case LOG_OUT:
+      return { ...initialState, isLoading: false }
 
     default:
       return state

@@ -2,11 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { logout } from '../login/ActionCreater'
 
-const Header = ({ auth: { isAuthenticated, user, isLoading } }) => {
+const Header = ({ auth: { isAuthenticated, user, isLoading }, logout }) => {
   const authenticated = user => (
     <>
-      <p className="nav__el nav__el--logout">Log out</p>
+      <p className="nav__el nav__el--logout" onClick={logout}>
+        Log out
+      </p>
       <Link className="nav__el" to="/me">
         <img
           className="nav__user-img"
@@ -50,11 +53,12 @@ const Header = ({ auth: { isAuthenticated, user, isLoading } }) => {
 
 Header.propTypes = {
   user: PropTypes.object,
-  auth: PropTypes.object
+  auth: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
   auth: state.auth
 })
 
-export default connect(mapStateToProps, null)(Header)
+export default connect(mapStateToProps, { logout })(Header)
