@@ -4,7 +4,13 @@ import {
   FAILURE_LOGIN,
   REQUEST_GET_CURRENT_USER,
   RECEIVE_GET_CURRENT_USER,
-  FAILURE_GET_CURRENT_USER
+  FAILURE_GET_CURRENT_USER,
+  REQUEST_SAVE_SETTINGS,
+  RECEIVE_SAVE_SETTINGS,
+  FAILURE_SAVE_SETTINGS,
+  REQUEST_SAVE_PASSWORD,
+  RECEIVE_SAVE_PASSWORD,
+  FAILURE_SAVE_PASSWORD
 } from './ActionTypes'
 
 export const requestLogin = () => ({
@@ -31,4 +37,30 @@ export const receiveGetCurrentUser = payload => ({
 
 export const failureGetCurrentUser = () => ({
   type: FAILURE_GET_CURRENT_USER
+})
+
+export const requestUpdateMe = () => ({
+  type: REQUEST_SAVE_SETTINGS
+})
+
+export const receiveUpdateMe = payload => ({
+  type: RECEIVE_SAVE_SETTINGS,
+  payload
+})
+
+export const failureUpdateMe = () => ({
+  type: FAILURE_SAVE_SETTINGS
+})
+
+export const requestUpdatePassword = () => ({
+  type: REQUEST_SAVE_PASSWORD
+})
+
+export const receiveUpdatePassword = payload => ({
+  type: RECEIVE_SAVE_PASSWORD,
+  payload
+})
+
+export const failureUpdatePassword = () => ({
+  type: FAILURE_SAVE_PASSWORD
 })

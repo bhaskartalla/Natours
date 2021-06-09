@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Spinner from './common/Spinner'
+import { clearConfigCache } from 'prettier'
 
 const PrivateRoute = ({
   component: Component,
@@ -13,15 +14,13 @@ const PrivateRoute = ({
   return (
     <Route
       {...rest}
-      render={props =>
-        isLoading ? (
-          <Spinner />
-        ) : isAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/login" />
-        )
-      }
+      render={props => {
+        if (isAuthenticated || isLoading) {
+          return <Component {...props} />
+        } else if (!isLoading) {
+          return <Redirect to="/login" />
+        }
+      }}
     />
   )
 }
@@ -35,4 +34,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 })
 
-export default connect(mapStateToProps, null)(PrivateRoute)
+export default connect(mapStateToProps)(PrivateRoute)

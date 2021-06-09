@@ -3,7 +3,32 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-const Header = ({ user }) => {
+const Header = ({ auth: { isAuthenticated, user, isLoading } }) => {
+  const authenticated = user => (
+    <>
+      <p className="nav__el nav__el--logout">Log out</p>
+      <Link className="nav__el" to="/me">
+        <img
+          className="nav__user-img"
+          src={`../assets/img/users/${user?.photo}`}
+          alt={user?.name}
+        />
+        <span>{user?.name}</span>
+      </Link>
+    </>
+  )
+
+  const notAuthenticated = () => (
+    <>
+      <Link className="nav__el" to="/login">
+        Log in
+      </Link>
+      <Link className="nav__el nav__el--cta" to="#">
+        Sign up
+      </Link>
+    </>
+  )
+
   return (
     <header className="header">
       <nav className="nav nav--tours">
@@ -15,27 +40,8 @@ const Header = ({ user }) => {
         <img src="../assets/img/logo-white.png" alt="Natours logo" />
       </div>
       <nav className="nav nav--user">
-        {user ? (
-          <>
-            <p className="nav__el nav__el--logout">Log out</p>
-            <Link className="nav__el" to="/me">
-              <img
-                className="nav__user-img"
-                src={`../assets/img/users/${user.photo}`}
-                alt={user.name}
-              />
-              <span>{user.name}</span>
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link className="nav__el" to="/login">
-              Log in
-            </Link>
-            <Link className="nav__el nav__el--cta" to="#">
-              Sign up
-            </Link>
-          </>
+        {!isLoading && (
+          <>{isAuthenticated ? authenticated(user) : notAuthenticated()}</>
         )}
       </nav>
     </header>
@@ -43,11 +49,12 @@ const Header = ({ user }) => {
 }
 
 Header.propTypes = {
-  user: PropTypes.object
+  user: PropTypes.object,
+  auth: PropTypes.object
 }
 
 const mapStateToProps = state => ({
-  user: state.auth.user
+  auth: state.auth
 })
 
 export default connect(mapStateToProps, null)(Header)

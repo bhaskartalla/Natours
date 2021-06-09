@@ -4,36 +4,26 @@ import { LOGIN_PATH, OVERVIEW_PATH, MY_PROFILE_PATH } from './pageRoutes'
 import PrivateRoute from './PrivateRoute'
 import Header from './layout/Header'
 import Footer from './layout/Footer'
+import Spinner from './common/Spinner'
 
 const Login = lazy(() => import('./login'))
 const Overview = lazy(() => import('./overview'))
 const MyProfile = lazy(() => import('./myProfile'))
 
-const Routes = () => (
-  <Router>
-    <Suspense
-      fallback={
-        <div
-          style={{
-            backgroungColor: 'red',
-            width: '100px',
-            height: '100px',
-            borderRadius: '50%'
-          }}
-        >
-          Loader
-        </div>
-      }
-    >
-      <Header />
-      <Switch>
-        <Route exact path={LOGIN_PATH} component={Login} />
-        <PrivateRoute exact path={MY_PROFILE_PATH} component={MyProfile} />
+const Routes = () => {
+  return (
+    <Router>
+      <Suspense fallback={<Spinner />}>
+        <Header />
         <Route exact path={OVERVIEW_PATH} component={Overview} />
-      </Switch>
-      <Footer />
-    </Suspense>
-  </Router>
-)
+        <Switch>
+          <PrivateRoute exact path={MY_PROFILE_PATH} component={MyProfile} />
+          <Route exact path={LOGIN_PATH} component={Login} />
+        </Switch>
+        <Footer />
+      </Suspense>
+    </Router>
+  )
+}
 
 export default memo(Routes)
