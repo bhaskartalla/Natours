@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { getAllTours } from './ActionCreater'
 import Spinner from '../common/Spinner'
 
 const Overview = ({ tours, getAllTours, isLoading }) => {
+  const history = useHistory()
   useEffect(() => {
     getAllTours()
   }, [getAllTours])
@@ -28,7 +31,8 @@ const Overview = ({ tours, getAllTours, isLoading }) => {
             price,
             ratingsAverage,
             ratingsQuantity,
-            slug
+            slug,
+            id
           } = tour
           return (
             <div key={i} className="card">
@@ -94,9 +98,26 @@ const Overview = ({ tours, getAllTours, isLoading }) => {
                     rating ({ratingsQuantity})
                   </span>
                 </p>
-                <a href={`/tour/${slug}`} className="btn btn--green btn--small">
+                {/* <Link
+                  to={`/tour/${slug}`}
+                  className="btn btn--green btn--small"
+                >
                   Details
-                </a>
+                </Link> */}
+
+                <button
+                  className="btn btn--green btn--small"
+                  onClick={() => {
+                    history.push({
+                      pathname: `/tour/${slug}`,
+                      state: {
+                        id
+                      }
+                    })
+                  }}
+                >
+                  Details
+                </button>
               </div>
             </div>
           )
